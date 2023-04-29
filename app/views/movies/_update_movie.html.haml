@@ -1,0 +1,18 @@
+#update-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h3#share-modal Update your movie
+      .modal-body
+        = form_for movie, method: :put do |f|
+          .row
+            .col-12
+              = f.label :title
+              = f.text_field :title, label: 'Movie title', class: 'form-control', value: movie.title, required: true
+          .row
+            .col-12
+              = f.label :movie_url
+              = f.text_field :movie_url, label: 'Youtube URL', class: 'form-control', value: movie.movie_url, required: true
+          .modal-footer
+            %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancle
+            = f.submit 'Update', class: 'btn btn-primary'

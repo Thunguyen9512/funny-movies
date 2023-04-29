@@ -2,7 +2,9 @@
   .movie-preview
     %iframe{:height => "315", :src => "#{movie.url_embed_url}", :width => "420"}
   .movie-detail
-    %h4= movie.title
+    %strong= movie.title
+    - if movie.shared_by?(current_user)
+      %i.fa-solid.fa-pen-to-square{"data-target" => "#update-modal", "data-toggle" => "modal", type: 'button'}
     .share-by
       Share by: 
       = movie.user.email
@@ -11,3 +13,4 @@
     .description
       %p Description:
       %p= movie.description
+  = render 'movies/update_movie', movie: movie

@@ -8,6 +8,17 @@ class MoviesController < ApplicationController
     @pagy, @movies = pagy(Movie.all)
   end
 
+  def update
+    return unless @movie.shared_by?(current_user)
+
+    if @movie.update(movie_params)
+      flash[:notice] = 'Movies succesfull update'
+    else
+      flash[:error] = 'Something wrong, please try again'
+    end
+    redirect_to root_path
+  end
+
   def create
     movie = Movie.new(movie_params.merge(user: current_user))
     if movie.save
@@ -52,7 +63,7 @@ class MoviesController < ApplicationController
   private
 
   def set_movie
-    @movie = Movie.find_by(id: params[:movie_id])
+    @movie = Movie.find_by(id: params[:id])
   end
 
   def movie_params

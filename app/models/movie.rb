@@ -24,9 +24,15 @@ class Movie < ApplicationRecord
     false
   end
 
-  def dislike_by?(liked_user)
-    return true if reacts.where(user: liked_user, react_type: 'dislike').present?
+  def dislike_by?(disliked_user)
+    return true if reacts.where(user: disliked_user, react_type: 'dislike').present?
 
+    false
+  end
+
+  def shared_by?(shared_user)
+    return true if shared_user&.id == user.id
+    
     false
   end
 
