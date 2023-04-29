@@ -21,6 +21,7 @@ class React < ApplicationRecord
   after_commit :recalculate_like_dislike_count
 
   validates :react_type, :movie_id, :user_id, presence: true
+  validates :movie, uniqueness: { scope: :user_id }
 
   private
 

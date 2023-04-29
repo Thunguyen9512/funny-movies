@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
         format.js { render :toggle_like_dislike }
       end
     else
-
+      redirect_to root_path
     end
   end
 
@@ -28,10 +28,11 @@ class MoviesController < ApplicationController
     if react.save
       @movie.reload
       respond_to do |format|
+        @movie.reload
         format.js { render :toggle_like_dislike }
       end
     else
-
+      redirect_to root_path
     end
   end
 

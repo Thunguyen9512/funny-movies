@@ -1,0 +1,25 @@
+- if flash[:notice]
+  .flash.alert.alert-success.alert-dismissible
+    %button.close{"data-dismiss"=>"alert", "area-hidden"=>"true"}
+      ×
+    %h4.flash__message
+      %i.icon.fa.fa-check
+      = flash[:notice]
+- if flash[:error]
+  .flash.alert.alert-danger.alert-dismissible
+    %button.close{"data-dismiss"=>"alert", "area-hidden"=>"true"}
+      ×
+    %h4.flash__message
+      %i.icon.fa.fa-times
+      = flash[:error]
+- if flash[:alert]
+  .flash.alert.alert-danger.alert-dismissible.has-alert-display
+    %button.close{"data-dismiss"=>"alert", "area-hidden"=>"true"}
+      ×
+    %h4.flash__message
+      - if flash[:alert].kind_of?(Array)
+        - flash[:alert].each do |message|
+          = message
+          %br
+      - else
+        = flash[:alert]
