@@ -1,1 +1,1 @@
-$(".toggle-group").html("#{j render(partial: 'movies/toggle_like_dislike', locals: { movie: @movie })}");
+$("##{@movie.id}.toggle-like-dislike").html("#{j render(partial: 'movies/toggle_like_dislike', locals: { movie: @movie })}");

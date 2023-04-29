@@ -1,12 +1,12 @@
 .single-container
   .movie-preview
-    %iframe{:height => "315", :src => "https://www.youtube.com/embed/tgbNymZ7vqY", :width => "420"}
+    %iframe{:height => "315", :src => "#{movie.url_embed_url}", :width => "420"}
   .movie-detail
     %h4= movie.title
     .share-by
       Share by: 
       = movie.user.email
-      .toggle-group.mb-1{id: movie.id}
+      .toggle-like-dislike.mb-1{id: movie.id, style: ('pointer-events: none' unless current_user)}
         = render 'movies/toggle_like_dislike', movie: movie
     .description
       %p Description:

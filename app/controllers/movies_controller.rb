@@ -5,6 +5,16 @@ class MoviesController < ApplicationController
     @movies = Movie.all
   end
 
+  def create
+    movie = Movie.new(movie_params.merge(user: current_user))
+    if movie.save
+      flash[:notice] = 'Movies succesfull shared'
+    else
+      flash[:error] = 'Something wrong, please try again'
+    end
+    redirect_to root_path
+  end
+
   def like
     return if @movie.liked_by?(current_user)
 
@@ -40,5 +50,9 @@ class MoviesController < ApplicationController
 
   def set_movie
     @movie = Movie.find_by(id: params[:movie_id])
+  end
+
+  def movie_params
+    params[:movie].permit(:title, :movie_url)
   end
 end

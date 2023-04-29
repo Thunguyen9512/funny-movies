@@ -1,0 +1,18 @@
+#share-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h3#share-modal Share a Youtube movie
+      .modal-body
+        = form_for :movie, url: movies_path, method: :post do |f|
+          .row
+            .col-12
+              = f.label :title
+              = f.text_field :title, label: 'Movie title', class: 'form-control', required: true
+          .row
+            .col-12
+              = f.label :movie_url
+              = f.text_field :movie_url, label: 'Youtube URL', class: 'form-control', required: true
+          .modal-footer
+            %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+            = f.submit 'Share', class: 'btn btn-primary'
