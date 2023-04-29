@@ -1,0 +1,7 @@
+.user_tab
+  .button-container
+    %p Welcome #{current_user.email}
+  .button-container
+    = link_to '<button type="button" class="btn btn-primary btn-standard">Share a movie</button>'.html_safe, destroy_user_session_path, data: { "turbo-method": :get }
+  .button-container
+    = link_to '<button type="button" class="btn btn-primary btn-standard">Logout</button>'.html_safe, destroy_user_session_path, data: { "turbo-method": :delete }
