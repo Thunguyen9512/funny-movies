@@ -1,0 +1,9 @@
+.like-dislike{style: ('pointer-events: none' unless current_user)}
+  = link_to like_movies_path(movie), method: :patch, remote: true do
+    %span.like_count.mr-2{class: ('text-secondary')}
+      %i.btn-like-dislike.fa-solid.fa-thumbs-up
+      = movie.like_count
+  = link_to dislike_movies_path(movie), method: :patch, remote: true do
+    %span.dislike_count{class: ('text-secondary')}
+      %i.btn-like-dislike.fa-solid.fa-thumbs-down
+      = movie.dislike_count

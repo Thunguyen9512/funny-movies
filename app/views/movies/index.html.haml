@@ -1,1 +1,4 @@
 .listing-container.container
+  - @movies.each do |movie|
+    = render 'movies/movie_single', movie: movie
+    

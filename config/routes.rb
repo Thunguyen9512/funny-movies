@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   resources :movies, only: %i[new create] do
     collection do
+      post :like
+      post :dislike
       # for custom route
     end
   end
