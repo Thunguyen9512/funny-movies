@@ -54,6 +54,14 @@ group :development do
   gem 'annotate'
 end
 
+group :test do
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
+  gem 'shoulda-matchers'
+end
+
 group :production do
   gem "capistrano"
   gem "capistrano3-puma"
