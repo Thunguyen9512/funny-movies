@@ -1,8 +1,11 @@
 class MoviesController < ApplicationController
+
+  include Pagy::Backend
+
   before_action :set_movie, except: :index
 
   def index
-    @movies = Movie.all
+    @pagy, @movies = pagy(Movie.all)
   end
 
   def create

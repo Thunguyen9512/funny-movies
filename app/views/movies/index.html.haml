@@ -1,4 +1,4 @@
 .listing-container.container
+  != pagy_bootstrap_nav(@pagy)
   - @movies.each do |movie|
     = render 'movies/movie_single', movie: movie
-    

@@ -66,6 +66,7 @@ end
 
 gem "devise"
 gem "redis", "~> 3.0"
+gem "pagy"
 
 # Views
 gem 'bootstrap', '4.1.1'
