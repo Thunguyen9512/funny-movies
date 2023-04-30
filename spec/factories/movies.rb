@@ -16,6 +16,6 @@ FactoryBot.define do
   factory :movie do
     movie_url { 'https://www.youtube.com/watch?v=2L32VYBW6C4&list=RDKXy_q2vOzjg&index=15&ab_channel=tas' }
     title { Faker::Movie.title }
-    user_id {User.first.id}
+    user
   end
 end

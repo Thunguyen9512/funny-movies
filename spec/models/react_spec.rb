@@ -20,57 +20,49 @@ RSpec.describe React, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:react_type) }
+
+    context 'uniq react for movie and user' do
+      let!(:react) { create(:react) }
+
+      it 'it invalid to create react with same user and movie' do
+        new_react = build(:react, movie: react.movie, user: react.user)
+
+        expect(new_react).to_not be_valid
+      end
+    end
   end
 
   describe 'callbacks' do 
     describe 'recalculate like dislike count' do
-
-      before do
-        create(:user)
-        create(:movie)
-      end
-
+      let(:movie) { create(:movie) }
       context 'new like dislike' do
-        let!(:user) { User.create(email: '123@gmail.com', password: '123456') }
-        let!(:movie) { Movie.create(movie_url: 'test_url', user_id: user.id) }
 
         it 'new like' do
           previous_like_count = movie.like_count
           previous_dislike_count = movie.dislike_count
-          React.create(
-            movie: movie,
-            user: User.first,
-            react_type: 'like'
-          )
-          expect(movie.dislike_count).to eq previous_dislike_count
+          create(:react, movie: movie, react_type: 'like')
+
           expect(movie.like_count).to eq previous_like_count + 1
+          expect(movie.dislike_count).to eq previous_dislike_count
         end
 
         it 'new dislike' do
           previous_like_count = movie.like_count
           previous_dislike_count = movie.dislike_count
-          React.create(
-            movie: movie,
-            user: User.first,
-            react_type: 'dislike'
-          )
+          create(:react, movie: movie, react_type: 'dislike')
+
           expect(movie.like_count).to eq previous_like_count
           expect(movie.dislike_count).to eq previous_dislike_count + 1
         end
       end
 
       context 'update like dislike' do
-        let!(:user) { User.first }
-        let!(:movie) { Movie.first }
-        let!(:react) { React.create(user_id: user.id, movie_id: movie.id, react_type: 'like') }
+        let!(:react) { create(:react, movie: movie, react_type: 'like') }
         it 'toggle like dislike' do
-          movie.reload
           previous_like_count = movie.like_count
           previous_dislike_count = movie.dislike_count
-          react.update(
-            react_type: 'dislike'
-          )
-          movie.reload
+          react.update(react_type: 'dislike')
+
           expect(movie.dislike_count).to eq previous_dislike_count + 1
           expect(movie.like_count).to eq previous_like_count - 1
         end

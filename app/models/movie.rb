@@ -36,7 +36,7 @@ class Movie < ApplicationRecord
     false
   end
 
-  def url_embed_url
+  def movie_url_embed
     movie_url.gsub('watch?v=', 'embed/').split('&').first
   end
 end

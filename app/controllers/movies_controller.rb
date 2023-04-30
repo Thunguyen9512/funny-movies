@@ -30,6 +30,7 @@ class MoviesController < ApplicationController
   end
 
   def like
+    byebug
     return if @movie.liked_by?(current_user)
 
     react = React.find_or_initialize_by(user: current_user, movie: @movie)

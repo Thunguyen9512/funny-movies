@@ -1,6 +1,6 @@
 .single-container
   .movie-preview
-    %iframe{:height => "315", :src => "#{movie.url_embed_url}", :width => "420"}
+    %iframe{:height => "315", :src => "#{movie.movie_url_embed}", :width => "420"}
   .movie-detail
     %strong= movie.title
     - if movie.shared_by?(current_user)

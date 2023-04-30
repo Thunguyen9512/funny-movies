@@ -44,6 +44,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop-rails'
+  gem 'database_cleaner'
 end
 
 group :development do
@@ -60,6 +61,7 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem 'shoulda-matchers'
+  gem "simplecov"
 end
 
 group :production do
