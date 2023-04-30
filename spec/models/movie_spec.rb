@@ -15,5 +15,13 @@
 require 'rails_helper'
 
 RSpec.describe Movie, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:reacts) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:movie_url) }
+    it { is_expected.to validate_presence_of(:title) }
+  end
 end

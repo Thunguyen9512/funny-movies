@@ -11,6 +11,8 @@
 #
 FactoryBot.define do
   factory :react do
-    
+    movie { Movie.first }
+    user { User.first }
+    react_type { 'like' }
   end
 end
