@@ -1,7 +1,8 @@
-.row
+.row.pt-4.pb-4{style: ('border-bottom: 2px solid #ccc')}
   .col-sm-6
     %h2
-      %i.fa-sharp.fa-solid.fa-house> Funny Movies
+      %i.fa-sharp.fa-solid.fa-house
+      Funny Movies
   .col-sm-6
     - if user_signed_in?
       = render 'shared/user_tab'

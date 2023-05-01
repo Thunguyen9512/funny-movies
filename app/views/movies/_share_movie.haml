@@ -13,6 +13,10 @@
             .col-12
               = f.label :movie_url
               = f.text_field :movie_url, label: 'Youtube URL', class: 'form-control', required: true
+          .row
+            .col-12
+              = f.label :description
+              = f.text_field :description, label: 'Description', class: 'form-control', required: false 
           .modal-footer
             %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
             = f.submit 'Share', class: 'btn btn-primary'

@@ -1,4 +1,4 @@
-#update-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+.update-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1", id: movie.id}
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header
@@ -13,6 +13,10 @@
             .col-12
               = f.label :movie_url
               = f.text_field :movie_url, label: 'Youtube URL', class: 'form-control', value: movie.movie_url, required: true
+          .row
+            .col-12
+              = f.label :description
+              = f.text_field :description, label: 'Description', class: 'form-control', required: false 
           .modal-footer
             %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cancle
             = f.submit 'Update', class: 'btn btn-primary'

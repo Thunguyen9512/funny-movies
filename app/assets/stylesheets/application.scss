@@ -1,2 +1,18 @@
 @import "bootstrap";
 @import "font-awesome";
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.btn-like-dislike:hover {
+  transform: scale(1.5);
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}

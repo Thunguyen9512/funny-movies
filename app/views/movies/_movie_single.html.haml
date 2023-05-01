@@ -1,10 +1,11 @@
-.single-container
-  .movie-preview
+.mt-4.mb-4.single-container.d-flex
+  .mr-4.movie-preview
     %iframe{:height => "315", :src => "#{movie.movie_url_embed}", :width => "420"}
   .movie-detail
-    %strong= movie.title
-    - if movie.shared_by?(current_user)
-      %i.fa-solid.fa-pen-to-square{"data-target" => "#update-modal", "data-toggle" => "modal", type: 'button'}
+    %strong{ style: ('font-size: 20px') }
+      = movie.title
+      - if movie.shared_by?(current_user)
+        %i.fa-solid.fa-pen-to-square{"data-target" => "##{movie.id}.update-modal", "data-toggle" => "modal", type: 'button', style: ('cursor: pointer')}
     .share-by
       Share by: 
       = movie.user.email
