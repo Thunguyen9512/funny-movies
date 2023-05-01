@@ -134,14 +134,50 @@ RSpec.describe MoviesController, type: :controller do
       }
     end
 
-    context 'user like for first time' do
+    context 'new like' do
       let(:movie) { create(:movie) }
       subject do
         post :like, params: { id: movie.id }, format: :js
+        response
       end
-      
+
       it 'should increase like count' do
-        expect { subject }.to change(React, :count).by(1)
+        expect { subject }.to change(movie.reacts.like, :count).by(1)
+                          .and change(movie.reacts.dislike, :count).by(0)
+        expect(movie.liked_by?(controller.current_user)).to be_truthy
+        expect(response.status).to eq 200
+      end
+    end
+
+    context 'new dislike' do
+      let(:movie) { create(:movie) }
+      subject do
+        post :dislike, params: { id: movie.id }, format: :js
+        response
+      end
+
+      it 'should increase like count' do
+        expect { subject }.to change(movie.reacts.dislike, :count).by(1)
+                          .and change(movie.reacts.like, :count).by(0)
+        expect(movie.dislike_by?(controller.current_user)).to be_truthy
+        expect(response.status).to eq 200
+      end
+    end
+
+    context 'toggle like to dislike' do
+      let(:movie) { create(:movie) }
+      let!(:react) { create(:react, movie: movie, react_type: 'like', user: controller.current_user) }
+      subject do
+        post :dislike, params: { id: movie.id }, format: :js
+        response
+      end
+
+      it 'should increase dislike count' do
+        expect { subject }.to change(movie.reacts.like, :count).by(-1)
+                          .and change(movie.reacts.dislike, :count).by(1)
+        expect(movie.liked_by?(controller.current_user)).to be_falsey
+        expect(movie.dislike_by?(controller.current_user)).to be_truthy
+        expect(response.status).to eq 200
       end
     end
   end
