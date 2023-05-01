@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
   before_action :set_movie, except: :index
 
   def index
-    @pagy, @movies = pagy(Movie.all)
+    @pagy, @movies = pagy(Movie.all.order(created_at: :desc))
   end
 
   def update

@@ -13,5 +13,5 @@
         = render 'movies/toggle_like_dislike', movie: movie
     .description
       %p Description:
-      %p= movie.description
+      %p= movie.description&.truncate(500)
   = render 'movies/update_movie', movie: movie

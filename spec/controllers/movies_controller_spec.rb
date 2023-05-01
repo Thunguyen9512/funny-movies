@@ -71,8 +71,10 @@ RSpec.describe MoviesController, type: :controller do
 
   describe 'PUT /movies' do
 
+    let!(:movie) { create(:movie, user: controller.current_user) }
     let(:params) do
       {
+        id: movie.id,
         movie: {
           movie_url: movie_url,
           title: title
@@ -84,7 +86,7 @@ RSpec.describe MoviesController, type: :controller do
       let(:movie_url) { nil }
       let(:title) { Faker::Movie.title }
       subject do
-        post :create, params: params
+        put :update, params: params
         response
       end
       it 'should redirect and show error message!' do
@@ -98,7 +100,7 @@ RSpec.describe MoviesController, type: :controller do
       let(:movie_url) { 'https://www.youtube.com/watch?v=K_tE-ZBze0M&list=RDKXy_q2vOzjg&index=14&ab_channel=TaynguyenSoundOfficial' }
       let(:title) { nil }
       subject do
-        post :create, params: params
+        put :update, params: params
         response
       end
       it 'should redirect and show error message!' do
@@ -112,12 +114,12 @@ RSpec.describe MoviesController, type: :controller do
       let(:movie_url) { 'https://www.youtube.com/watch?v=K_tE-ZBze0M&list=RDKXy_q2vOzjg&index=14&ab_channel=TaynguyenSoundOfficial' }
       let(:title) { Faker::Movie.title }
       subject do
-        post :create, params: params
+        put :update, params: params
         response
       end
       it 'should redirect and show success message!' do
-        expect { subject }.to change(Movie, :count).by(1)
-        expect(request.flash[:notice]).to eq('Movies succesfull shared')
+        expect { subject }.not_to change(Movie, :count)
+        expect(request.flash[:notice]).to eq('Movies succesfull update')
         expect(response.status).to eq 302
       end
     end
